@@ -12,8 +12,8 @@ def parse(fg, url):
 		print("---")
 		fe.title(item.a.contents[0])
 		fe.link(href=item.a["href"])
-		print(fe.title)
-		print(fe.link)
+		print(fe.title())
+		print(fe.link())
 
 
 		from datetime import datetime
@@ -22,9 +22,9 @@ def parse(fg, url):
 		datetime_obj = datetime.strptime(item.find("span", {"class": "feed-date"}).string, "%d. %m. %Y")
 		datetime_obj_utc = datetime_obj.replace(tzinfo=timezone('UTC'))
 		fe.pubDate(pubDate=datetime_obj_utc)
-		print(fe.pubDate)
+		print(fe.pubDate())
 		fe.author(name=item.find("span", {"class": "feed-source"}).string, email="unknown@unknown.de")
-		print(fe.author)
+		print(fe.author())
 
 fg = FeedGenerator()
 fg.title('Feed')
