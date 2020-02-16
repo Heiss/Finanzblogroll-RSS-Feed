@@ -14,7 +14,7 @@ def parse(fg, url):
 		
 		date = item.find("span", {"class": "feed-date"}).contents
 		if date:
-			import datetime
+			from datetime import datetime
 			fe.published(datetime.strptime(date, '%d. %m. %Y'))
 		
 		fe.author(item.find("span", {"class": "feed-source"}).contents)
