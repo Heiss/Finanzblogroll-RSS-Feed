@@ -31,8 +31,9 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Update gist
       run: |
+        apt-get install curl jq
         python parse.py
-        gist -u ${{ secrets.GIST_ID }} feed.xml
+        curl -i -X PUT -H 'Authorization: token ${{ secrets.GH_TOKEN }}' -d "{\"path\": \"feed.xml\", \"message\": \"update\", \"content\": \"${cat feed.xml}\"}" https://api.github.com/gists/${{ secrets.GIST_ID }}
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
         GIST_ID: ${{ secrets.GIST_ID }}
