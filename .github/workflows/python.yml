@@ -33,7 +33,7 @@ jobs:
       run: |
         sudo apt-get install curl
         python parse.py
-        curl -i -X PATCH -H 'Authorization: token ${{ secrets.GH_TOKEN }}' -d "{\"files\": {\"feed.xml\": {\"content\": \"$(cat feed.xml)\"}}}" https://api.github.com/gists/${{ secrets.GIST_ID }}
+        echo "{\"files\": {\"feed.xml\": {\"content\": \"$(cat feed.xml)\"}}}" | curl -i -X PATCH -H 'Authorization: token ${{ secrets.GH_TOKEN }}' -d @- https://api.github.com/gists/${{ secrets.GIST_ID }}
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
         GIST_ID: ${{ secrets.GIST_ID }}
