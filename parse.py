@@ -14,12 +14,16 @@ def parse(fg, url):
 
 		try:
 			from datetime import datetime
-			fe.published(datetime.strptime(item.find("span", {"class": "feed-date"}).contents[0], '%d. %m. %Y'))
+			import pytz
+			
+			datetime_obj = datetime.strptime(item.find("span", {"class": "feed-date"}).contents[0], "%d. %m. %Y")
+			datetime_obj_utc = datetime_obj.replace(tzinfo=timezone('UTC'))
+			fe.published(datetime_obj_utc)
 		except Exception as e:
 			print(e)
 		
 		try:
-			fe.author(item.find("span", {"class": "feed-source"}).contents[0])
+			fe.author({"name":item.find("span", {"class": "feed-source"}).contents[0]})
 		except Exception as e:
 			print(e)
 
