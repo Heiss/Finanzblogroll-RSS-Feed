@@ -31,6 +31,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Update gist
       run: |
+        python parse.py
         gist -u ${{ secrets.GIST_ID }} feed.xml
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
