@@ -23,7 +23,7 @@ def parse(fg, url):
 		fe.pubDate(pubDate=datetime_obj_utc)
 		print(fe)
 		fe.author(name=item.find("span", {"class": "feed-source"}).string, email="unknown@unknown.de")
-	      	print(fe)
+		print(fe)
 
 fg = FeedGenerator()
 fg.title('Feed')
