@@ -8,6 +8,7 @@ def parse(fg, url):
 
 	items = soup.find_all("li", {"class": "feed-item"})
 	for item in items:
+		print(f"current item: {item}")
 		fe = fg.add_entry()
 		fe.title(item.a.contents[0])
 		fe.link(href=item.a["href"])
