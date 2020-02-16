@@ -19,7 +19,10 @@ def parse(fg, url):
 		except:
 			pass
 		
-		fe.author(item.find("span", {"class": "feed-source"}).contents)
+		try:
+			fe.author(item.find("span", {"class": "feed-source"}).contents)
+		except:
+			pass
 
 
 fg = FeedGenerator()
