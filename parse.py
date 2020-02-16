@@ -23,7 +23,7 @@ def parse(fg, url):
 		datetime_obj_utc = datetime_obj.replace(tzinfo=timezone('UTC'))
 		fe.pubDate(pubDate=datetime_obj_utc)
 		print(fe.pubDate())
-		fe.author(name=item.find("span", {"class": "feed-source"}).string)
+		fe.author(name=item.find("span", {"class": "feed-source"}).string, email="unknown")
 		print(fe.author())
 
 fg = FeedGenerator()
