@@ -11,12 +11,10 @@ def parse(fg, url):
 		fe = fg.add_entry()
 		fe.title(item.a.contents)
 		fe.link(href=item.a["href"])
-		
-		date = item.find("span", {"class": "feed-date"}).contents
-		
+
 		try:
 			from datetime import datetime
-			fe.published(datetime.strptime(date, '%d. %m. %Y'))
+			fe.published(datetime.strptime(item.find("span", {"class": "feed-date"}).contents, '%d. %m. %Y'))
 		except:
 			pass
 		
@@ -27,8 +25,7 @@ def parse(fg, url):
 
 fg = FeedGenerator()
 fg.title('Feed')
-fg.description("")
-
+fg.description("Feed description")
 
 urls = []
 with open("linklist.txt", "r") as file:
