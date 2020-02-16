@@ -17,7 +17,7 @@ def parse(fg, url):
 
 		datetime_obj = datetime.strptime(item.find("span", {"class": "feed-date"}).string, "%d. %m. %Y")
 		datetime_obj_utc = datetime_obj.replace(tzinfo=timezone('UTC'))
-		fe.published(datetime_obj_utc)
+		fe.published(published=datetime_obj_utc)
 		fe.author(name=item.find("span", {"class": "feed-source"}).string)
 
 fg = FeedGenerator()
