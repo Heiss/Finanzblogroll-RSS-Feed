@@ -28,7 +28,7 @@ def parse(fg, url):
 			print(f"Error in pubDate: {e}")
 		
 		try:
-			fe.author(name=item.find("span", {"class": "feed-source"}).string})
+			fe.author(name=item.find("span", {"class": "feed-source"}).string)
 		except Exception as e:
 			print(f"Error in author: {e}")
 
