@@ -30,6 +30,7 @@ def parse(fg, url):
 		try:
 			fe.author(name=item.find("span", {"class": "feed-source"}).string)
 		except Exception as e:
+			fe.author(name="Unknown")
 			print(f"Error in author: {e}")
 
 fg = FeedGenerator()
