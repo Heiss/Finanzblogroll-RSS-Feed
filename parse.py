@@ -11,7 +11,12 @@ def parse(fg, url):
 		fe = fg.add_entry()
 		fe.title(item.a.contents)
 		fe.link(href=item.a["href"])
-		fe.published(item.find("span", {"class": "feed-date"}).contents)
+		
+		date = item.find("span", {"class": "feed-date"}).contents
+		if date:
+			import datetime
+			fe.published(datetime.strptime(date, '%d. %m. %Y'))
+		
 		fe.author(item.find("span", {"class": "feed-source"}).contents)
 
 
