@@ -12,21 +12,13 @@ def parse(fg, url):
 		fe.title(item.a.contents[0])
 		fe.link(href=item.a["href"])
 
-		try:
-			from datetime import datetime
-			from pytz import timezone
-			
-			datetime_obj = datetime.strptime(item.find("span", {"class": "feed-date"}).string, "%d. %m. %Y")
-			datetime_obj_utc = datetime_obj.replace(tzinfo=timezone('UTC'))
-			fe.published(datetime_obj_utc)
-		except Exception as e:
-			print(f"Error in pubDate: {e}")
-		
-		try:
-			fe.author(name=item.find("span", {"class": "feed-source"}).string)
-		except Exception as e:
-			fe.author(name="Unknown")
-			print(f"Error in author: {e}")
+		from datetime import datetime
+		from pytz import timezone
+
+		datetime_obj = datetime.strptime(item.find("span", {"class": "feed-date"}).string, "%d. %m. %Y")
+		datetime_obj_utc = datetime_obj.replace(tzinfo=timezone('UTC'))
+		fe.published(datetime_obj_utc)
+		fe.author(name=item.find("span", {"class": "feed-source"}).string)
 
 fg = FeedGenerator()
 fg.title('Feed')
