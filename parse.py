@@ -7,11 +7,7 @@ def parse(fg, url):
 	soup = BeautifulSoup(req.content)
 
 	items = soup.find_all("li", {"class": "feed-item"})
-	for item in items:
-		print(f"current item: {item}")
-		print("date: {}, author: {}".format(item.find("span", {"class": "feed-date"}).string, item.find("span", {"class": "feed-source"}).string))
-		
-		
+	for item in items:		
 		fe = fg.add_entry()
 		fe.title(item.a.contents[0])
 		fe.link(href=item.a["href"])
@@ -22,7 +18,6 @@ def parse(fg, url):
 			
 			datetime_obj = datetime.strptime(item.find("span", {"class": "feed-date"}).string, "%d. %m. %Y")
 			datetime_obj_utc = datetime_obj.replace(tzinfo=timezone('UTC'))
-			print(datetime_obj_utc)
 			fe.published(datetime_obj_utc)
 		except Exception as e:
 			print(f"Error in pubDate: {e}")
