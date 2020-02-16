@@ -13,6 +13,7 @@ def parse(fg, url):
 		fe.link(href=item.a["href"])
 		
 		date = item.find("span", {"class": "feed-date"}).contents
+		
 		try:
 			from datetime import datetime
 			fe.published(datetime.strptime(date, '%d. %m. %Y'))
@@ -24,11 +25,16 @@ def parse(fg, url):
 		except:
 			pass
 
-
 fg = FeedGenerator()
+fg.title('Feed')
+fg.description("")
+
+
 urls = []
 with open("linklist.txt", "r") as file:
-	parse(fg, file.readline())
+	url = file.readline()
+	fg.link( href=url, rel='self')
+	parse(fg, url)
 
 fg.rss_str(pretty=True)
 fg.rss_file('feed.xml')
