@@ -20,12 +20,12 @@ def parse(fg, url):
 			datetime_obj_utc = datetime_obj.replace(tzinfo=timezone('UTC'))
 			fe.published(datetime_obj_utc)
 		except Exception as e:
-			print(e)
+			print(f"Error in pubDate: {e}")
 		
 		try:
 			fe.author({"name":item.find("span", {"class": "feed-source"}).contents[0]})
 		except Exception as e:
-			print(e)
+			print(f"Error in author: {e}")
 
 fg = FeedGenerator()
 fg.title('Feed')
