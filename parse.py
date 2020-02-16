@@ -33,5 +33,16 @@ with open("linklist.txt", "r") as file:
 	fg.link( href=url, rel='self')
 	parse(fg, url)
 
-fg.rss_str(pretty=True)
-fg.rss_file('feed.xml')
+gist = {
+	"files": {
+		"feed.xml": {
+			"content": fg.rss_str(pretty=True)
+		}
+	}
+}
+
+import sys
+headers = {
+	"Authorization": "token {}".format(sys.argv[2])
+}
+requests.patch("https://api.github.com/gists/{}".format(sys.argv[1]), headers=headers, json=gist)
