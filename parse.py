@@ -13,9 +13,11 @@ def parse(fg, url):
 		fe.link(href=item.a["href"])
 		
 		date = item.find("span", {"class": "feed-date"}).contents
-		if date:
+		try:
 			from datetime import datetime
 			fe.published(datetime.strptime(date, '%d. %m. %Y'))
+		except:
+			pass
 		
 		fe.author(item.find("span", {"class": "feed-source"}).contents)
 
