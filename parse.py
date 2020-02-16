@@ -16,12 +16,12 @@ def parse(fg, url):
 			from datetime import datetime
 			fe.published(datetime.strptime(item.find("span", {"class": "feed-date"}).contents[0], '%d. %m. %Y'))
 		except Exception as e:
-			print(e.msg)
+			print(e)
 		
 		try:
 			fe.author(item.find("span", {"class": "feed-source"}).contents[0])
 		except Exception as e:
-			print(e.msg)
+			print(e)
 
 fg = FeedGenerator()
 fg.title('Feed')
