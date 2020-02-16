@@ -9,7 +9,7 @@ def parse(fg, url):
 	items = soup.find_all("li", {"class": "feed-item"})
 	for item in items:		
 		fe = fg.add_entry()
-		print("---"
+		print("---")
 		print(fe)
 		fe.title(item.a.contents[0])
 		fe.link(href=item.a["href"])
