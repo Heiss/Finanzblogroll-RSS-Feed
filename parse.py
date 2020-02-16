@@ -14,7 +14,7 @@ def parse(fg, url):
 
 		try:
 			from datetime import datetime
-			import pytz
+			from pytz import timezone
 			
 			datetime_obj = datetime.strptime(item.find("span", {"class": "feed-date"}).contents[0], "%d. %m. %Y")
 			datetime_obj_utc = datetime_obj.replace(tzinfo=timezone('UTC'))
