@@ -13,7 +13,7 @@ def parse(fg, url):
 		print(fe)
 		fe.title(item.a.contents[0])
 		fe.link(href=item.a["href"])
-	      	print(fe)
+		print(fe)
 
 		from datetime import datetime
 		from pytz import timezone
