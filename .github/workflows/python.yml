@@ -3,7 +3,7 @@ name: Python package
 on:
   push:
   schedule:
-    - cron: '0 */1 * * *' # Every three hours
+    - cron: '0 */1 * * *' # Every hour
 jobs:
   build:
 
