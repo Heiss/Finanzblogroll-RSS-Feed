@@ -1,21 +1,24 @@
 from bs4 import BeautifulSoup
 import requests
+from feedgen.feed import FeedGenerator
 
-url = "https://finanzblogroll.de/rss-feed/"
-req = requests.get(url)
-soup = BeautifulSoup(req.content)
-print(soup.title)
+def parse(fg, url):
+	req = requests.get(url)
+	soup = BeautifulSoup(req.content)
 
-feed = []
-items = soup.find_all("li", {"class": "feed-item"})
-for item in items:
-	obj = {
-		"link": item.a["href"],
-		"title": item.a.contents,
-		"date": item.find("span", {"class": "feed-date"}).contents,
-		"source": item.find("span", {"class": "feed-source"}).contents
-	}
-	feed.append(obj)
+	items = soup.find_all("li", {"class": "feed-item"})
+	for item in items:
+		fe = fg.add_entry()
+		fe.title(item.a.contents)
+		fe.link(href="item.a["href"]")
+		fe.date(item.find("span", {"class": "feed-date"}).contents)
+		fe.author(item.find("span", {"class": "feed-source"}).contents)
 
-print(feed)
 
+fg = FeedGenerator()
+urls = []
+with open("linklist.txt", "r") as file:
+	parse(fg, file.readline())
+
+fg.rss_str(pretty=True)
+fg.rss_file('feed.xml')
