@@ -45,7 +45,11 @@ gist = {
 }
 
 import sys
-headers = {
-	"Authorization": "token {}".format(sys.argv[2])
-}
-requests.patch("https://api.github.com/gists/{}".format(sys.argv[1]), headers=headers, json=gist)
+
+try:
+	headers = {
+		"Authorization": "token {}".format(sys.argv[2])
+	}
+	requests.patch("https://api.github.com/gists/{}".format(sys.argv[1]), headers=headers, json=gist)
+except:
+	fg.rss_file('feed.xml')
